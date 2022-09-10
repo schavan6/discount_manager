@@ -146,10 +146,14 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
                             <input type="text" name="name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $name; ?>">
                             <span class="invalid-feedback"><?php echo $name_err;?></span>
                         </div>
+
+                        
                         <div class="form-group">
-                            <label>Type</label>
-                            <input type="text" name="type" class="form-control <?php echo (!empty($type_err)) ? 'is-invalid' : ''; ?>"><?php echo $type; ?></input>
-                            <span class="invalid-feedback"><?php echo $type_err;?></span>
+                            <label for="type">Type</label>
+                            <select class="form-control <?php echo (!empty($type_err)) ? 'is-invalid' : ''; ?>" id="type" name="type">
+                                <option <?= $type == 'Percentage' ? ' selected="selected"' : '';?> value="Percentage">Percentage</option>
+                                <option <?= $type == 'Dollars' ? ' selected="selected"' : '';?> value="Dollars">Dollars</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Value</label>

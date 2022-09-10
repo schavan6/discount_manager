@@ -97,18 +97,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <input type="text" name="name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $name; ?>">
                             <span class="invalid-feedback"><?php echo $name_err;?></span>
                         </div>
+                        
                         <div class="form-group">
-                            <label>Type</label>
-                            <input type="text" name="type" class="form-control <?php echo (!empty($type_err)) ? 'is-invalid' : ''; ?>"><?php echo $type; ?></input>
-                            <span class="invalid-feedback"><?php echo $type_err;?></span>
+                            <label for="type">Type</label>
+                            <select class="form-control <?php echo (!empty($type_err)) ? 'is-invalid' : ''; ?>" id="type" name="type">
+                                <option value="Percentage">Percentage</option>
+                                <option value="Dollars">Dollars</option>
+                            </select>
                         </div>
+            
                         <div class="form-group">
                             <label>Value</label>
                             <input type="text" name="value" class="form-control <?php echo (!empty($value_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $value; ?>">
                             <span class="invalid-feedback"><?php echo $value_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="index.php" class="btn btn-secondary ml-2">Cancel</a>
+                        <a href="admin_index.php" class="btn btn-secondary ml-2">Cancel</a>
                     </form>
                 </div>
             </div>        
