@@ -54,23 +54,36 @@
 
                     if ($result = mysqli_query($link, $sql)) {
                         if (mysqli_num_rows($result) > 0) {
-                            while ($row = mysqli_fetch_array($result)) {
+
+                            $products = $result->fetch_all(MYSQLI_ASSOC);
+                            
+                            foreach ($products as $row) {
                                 echo "<div class='card mb-3'>";
                                     echo "<div class='card-block'>";
                                         echo "<img src='static/2' height='200' width='200' >";
-                                        echo "<h3>" . $row['name'] . "</h3>";
-                                        echo "<p>Price: $" . $row['price'] . "</p>";
-                                        echo "<select width='100' id='discount' name='discount'>";
+                                        echo "<h3 class=''>" . $row['name'] . "</h3>";
                                         foreach ($discounts as $discount) {
-                                            if ($discount['product_id'] == $row['id']) {
-                                                echo "<option value=" . $discount['id'] . ">" . $discount['name'] . "</option>";
-                                            }
+                                            echo "<div class='form-check'>";
+                                                echo "<input onClick = applyDiscount(this) class='form-check-input' type='checkbox' value='" . $row['id'] . "_" . $discount['id'] . "' id='" . $discount['id'] . "'>";
+                                                echo "<label class='form-check-label' for='" . $discount['id']. "'>";
+                                                echo $discount['name'];
+                                                echo "</label>";
+                                            echo "</div>";
                                         }
-                                        echo "</select>";
-                                        #echo "<button  onClick='addToCart(" . json_encode($row) . ")' name ='add-to-cart' type='button' class='add-to-cart btn btn-success'>Add to Cart</button>";
+                                        
+                                        echo "<p>Price: $" . $row['price'] . "</p>";  
+                                        echo "<p>Discounted Price: $<span id='p_" . $row['id'] . "'>" . $row['price'] . "</span></p>";    
+                                        
                                     echo "</div>";
                                 echo "</div>";
                             }
+
+                            echo "<p>Total: $ <span id='total'></span></p>";
+
+                            echo "<script type='text/javascript'>",
+                                    "saveProductInfo(" . json_encode($products) . "," . json_encode($discounts) . ");",
+                                "</script>";
+
                         } else {
                             echo '<div class="alert alert-danger"><em>Please add products to checkout.</em></div>';
                         }
