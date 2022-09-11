@@ -8,6 +8,9 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="js/cart.js"></script>
+
     <style>
         .wrapper {
             width: 600px;
@@ -33,7 +36,7 @@
                 <div class="col-md-12">
                     <div class="mt-5 mb-3 clearfix">
                         <h2 class="pull-left">Our Newest Cereals</h2>
-                        <a href="create.php" class="btn btn-success pull-right"><i class="fa fa-shopping-cart"></i> Checkout</a>
+                        <button  onClick='checkout()' name ='checkout' type='button' class='pull-right btn btn-success'><i class="fa fa-shopping-cart"></i> Checkout</button>
                     </div><!-- clearfix -->
                     <?php
                     // Include config file
@@ -45,10 +48,11 @@
                             while ($row = mysqli_fetch_array($result)) {
                                 echo "<div class='card mb-3'>";
                                     echo "<div class='card-block'>";
-                                        echo "<img src='static/2' height='250' width='250' >";
+                                        echo "<img src='static/2' height='300' width='300' >";
                                         echo "<h3>" . $row['name'] . "</h3>";
                                         echo "<p>" . $row['description'] . "</p>";
                                         echo "<p>Price: $" . $row['price'] . "</p>";
+                                        echo "<button  onClick='addToCart(" . json_encode($row) . ")' name ='add-to-cart' type='button' class='add-to-cart btn btn-success'>Add to Cart</button>";
                                     echo "</div>";
                                 echo "</div>";
                             }
