@@ -49,7 +49,7 @@
                     
                     $sql = "SELECT c.user_id, p.id, p.name, p.price from cart c, product p where p.id = c.product_id and c.user_id = '" . session_id() . "';";
                     
-                    $sql1 = "SELECT d.id, d.name, d.isPercentage, d.value, pd.product_id from discount d, product_discount pd where d.id = pd.discount_id AND d.isActive = 1";
+                    $sql1 = "SELECT DISTINCT d.id, d.name, d.isPercentage, d.value from discount d, product_discount pd where d.id = pd.discount_id AND d.isActive = 1";
 
                     $data = mysqli_query($link, $sql1);
 
