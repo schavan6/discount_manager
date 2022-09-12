@@ -22,7 +22,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         $name = $input_name;
     }
     
-    // Validate address address
+    
     $input_description = trim($_POST["description"]);
     if (empty($input_description)) {
         $description_err = "Please enter a description.";     
@@ -30,7 +30,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         $description = $input_description;
     }
     
-    // Validate salary
+    
     $input_price = trim($_POST["price"]);
     if (empty($input_price)) {
         $price_err = "Please enter the value.";     
