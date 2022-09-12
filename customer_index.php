@@ -64,6 +64,7 @@
                     else {
                         echo "Oops! Something went wrong. Please try again later.";
                     }
+                    echo '<a href="index.php" class="btn btn-danger pull-left mr-5"> <i class="fa fa-arrow-left"></i> Back</a>';
                     // Close connection
                     mysqli_close($link);
 

@@ -49,8 +49,10 @@
                     
                     $sql = "SELECT c.user_id, p.id, p.name, p.price from cart c, product p where p.id = c.product_id and c.user_id = '" . session_id() . "';";
                     
-                    $sql1 = "SELECT DISTINCT d.id, d.name, d.isPercentage, d.value from discount d, product_discount pd where d.id = pd.discount_id AND d.isActive = 1";
+                    $sql1 = "SELECT DISTINCT pd.product_id, d.id, d.name, d.isPercentage, d.value from discount d, product_discount pd where d.id = pd.discount_id AND d.isActive = 1";
 
+                    //bring product ids with above query, duplicate ok
+                    //display only if prod id matches with row and not already displayed (can be checked with an array)
                     $data = mysqli_query($link, $sql1);
 
                     $discounts = $data->fetch_all(MYSQLI_ASSOC);
@@ -66,12 +68,15 @@
                                         echo "<img src='static/2' height='200' width='200' >";
                                         echo "<h3 class=''>" . $row['name'] . "</h3>";
                                         foreach ($discounts as $discount) {
-                                            echo "<div class='form-check'>";
-                                                echo "<input onClick = applyDiscount(this) class='form-check-input' type='checkbox' value='" . $row['id'] . "_" . $discount['id'] . "' id='" . $discount['id'] . "'>";
-                                                echo "<label class='form-check-label' for='" . $discount['id']. "'>";
-                                                echo $discount['name'];
-                                                echo "</label>";
-                                            echo "</div>";
+                                            if (strcmp($discount['product_id'], $row['id']) == 0) {
+                                                echo "<div class='form-check'>";
+                                                    echo "<input onClick = applyDiscount(this) class='form-check-input' type='checkbox' value='" . $row['id'] . "_" . $discount['id'] . "' id='" . $discount['id'] . "'>";
+                                                    echo "<label class='form-check-label' for='" . $discount['id']. "'>";
+                                                    echo $discount['name'];
+                                                    echo "</label>";
+                                                echo "</div>";
+                                            }
+                                            
                                         }
                                         
                                         echo "<p>Price: $" . $row['price'] . "</p>";  
@@ -91,6 +96,9 @@
                         } else {
                             echo '<div class="alert alert-danger"><em>Please add products to checkout.</em></div>';
                         }
+                        echo "<br/>";
+                        echo "<br/>";
+                        echo '<a href="customer_index.php" class="btn btn-danger pull-left mr-5"> <i class="fa fa-arrow-left"></i> Back</a>';
                     }
                     ?>
                 </div><!-- col-md-12  -->

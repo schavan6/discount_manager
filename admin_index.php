@@ -24,7 +24,9 @@
                         <a href="discounts.php" class="btn btn-success"> Manage Discounts</a>
                         <a href="products.php" class="btn btn-success"> Manage Products</a>
                     </div>
+                    <a href="index.php" class="btn btn-danger mt-5"> <i class="fa fa-left-arrow"></i> Back</a>
                 </div><!-- col-md-12 -->
+                
             </div><!-- row -->
         </div><!-- container-fluid -->
     </div><!-- wrapper -->

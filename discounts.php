@@ -67,6 +67,7 @@
                                     }
                                     echo "</tbody>";                            
                                 echo "</table>";
+                                echo '<a href="admin_index.php" class="btn btn-danger mt-5"> <i class="fa fa-left-arrow"></i> Back</a>';
                                 // Free result set
                                 mysqli_free_result($result);
 
