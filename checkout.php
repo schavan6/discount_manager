@@ -38,12 +38,12 @@
                     
                     $sql1 = "SELECT DISTINCT pd.product_id, d.id, d.name, d.isPercentage, d.value from discount d, product_discount pd where d.id = pd.discount_id AND d.isActive = 1";
 
-                    //bring product ids with above query, duplicate ok
-                    //display only if prod id matches with row and not already displayed (can be checked with an array)
                     $data = mysqli_query($link, $sql1);
 
+                    //all active discounts applied on products in the system
                     $discounts = $data->fetch_all(MYSQLI_ASSOC);
 
+                    //query to get current cart products' info
                     if ($result = mysqli_query($link, $sql)) {
                         if (mysqli_num_rows($result) > 0) {
 

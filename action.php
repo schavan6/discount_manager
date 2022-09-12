@@ -2,6 +2,7 @@
 session_start();
 require_once "config.php";
 
+//request to insert item into cart
 if (isset($_POST["addToCart"])) {
     
     $user_id = session_id();
@@ -24,10 +25,9 @@ if (isset($_POST["addToCart"])) {
 
     }
 
-    
-
 }
 
+//delete cart items upon logout
 if (isset($_POST["logout"])) {
     
     $user_id = $_POST["userId"];

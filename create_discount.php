@@ -13,11 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if (empty($input_name)) {
         $name_err = "Please enter a name.";
-    } else{
+    } else {
         $name = $input_name;
     }
     
-    // Validate address
+    //validate type
     $input_type = trim($_POST["type"]);
     if (empty($input_type)) {
         $type_err = "Please enter a type.";     
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $type = $input_type;
     }
     
-    // Validate salary
+   //validate value
     $input_value = trim($_POST["value"]);
     if (empty($input_value)) {
         $value_err = "Please enter the value.";     
@@ -37,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $value = $input_value;
     }
 
+    //validate isActive
     if (isset($_POST['isActive']) && $_POST['isActive'] == '1') {
         $isActive = 1;
     }

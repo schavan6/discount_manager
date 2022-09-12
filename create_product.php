@@ -16,7 +16,6 @@ $name_err = $description_err = $price_err = "";
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate name
-    // Validate name
     $input_name = trim($_POST["name"]);
     if (empty($input_name)) {
         $name_err = "Please enter a name.";
@@ -24,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $name = $input_name;
     }
     
-    // Validate address address
     $input_description = trim($_POST["description"]);
     if (empty($input_description)) {
         $description_err = "Please enter a description.";     
@@ -32,7 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $description = $input_description;
     }
     
-    // Validate salary
     $input_price = trim($_POST["price"]);
     if (empty($input_price)) {
         $price_err = "Please enter the value.";     
@@ -41,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else{
         $price = $input_price;
     }
+    
     // Check input errors before inserting in database
     if (empty($name_err) && empty($type_err) && empty($value_err)) {
         // Prepare an insert statement

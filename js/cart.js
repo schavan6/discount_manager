@@ -3,6 +3,7 @@ let productIdToDiscountedPrice = new Map();
 let total = 0;
 let discountIdToDiscount = new Map();
 
+//add product to cart
 function addToCart(product) {
   var pid = product['id'];
   $.ajax({
@@ -15,6 +16,7 @@ function addToCart(product) {
   });
 }
 
+//checkout cart
 function checkout(product) {
   window.location.href = 'checkout.php';
 }
@@ -22,7 +24,9 @@ function checkout(product) {
 function applyDiscount(element) {
   var discountInfo = element.value.split('_');
 
+  //product on which the discount is applied
   var productId = discountInfo[0];
+  //id of applied discount
   var discountId = discountInfo[1];
 
   var discount = discountIdToDiscount.get(discountId);
@@ -32,14 +36,18 @@ function applyDiscount(element) {
 
   var originalPrice = productIdToOriginalPrice.get(productId);
 
+  //discount is applied by checking the checkbox
   if (element.checked) {
+    //percentage discount
     if (discount['isPercentage'] === '1') {
       var percent = parseInt(discount['value']);
       var off = (originalPrice * percent) / 100;
     } else {
+      //discount in dollars
       var off = parseInt(discount['value']);
     }
 
+    //to make sure discounted price doesn't go below 0
     if (off > price) {
       off = price;
     }
@@ -48,8 +56,10 @@ function applyDiscount(element) {
 
     productIdToDiscountedPrice.set(productId, price);
 
+    //total price of all cart items
     total -= priceBeforeDiscount - price;
   } else {
+    //discount is removed
     if (discount['isPercentage'] === '1') {
       var percent = parseInt(discount['value']);
       price += (originalPrice * percent) / 100;
@@ -67,6 +77,9 @@ function applyDiscount(element) {
   $('#p_' + productId).html(price);
 }
 
+/*
+  Make initial maps that will be later used for discount calculation
+ */
 function saveProductInfo(products, discounts) {
   products.forEach((product) => {
     productIdToOriginalPrice.set(product['id'], parseInt(product['price']));
