@@ -25,6 +25,9 @@
         img {
             float: left;
         }
+        #totalHeader {
+            float: left;
+        }
     </style>
     <script>
         $(document).ready(function() {
@@ -44,7 +47,7 @@
                     // Include config file
                     require_once "config.php";
                     
-                    $sql = "SELECT c.user_id, p.id, p.name, p.price from cart c, product p where p.id = c.product_id and c.user_id = '" . $_SESSION["uid"] . "';";
+                    $sql = "SELECT c.user_id, p.id, p.name, p.price from cart c, product p where p.id = c.product_id and c.user_id = '" . session_id() . "';";
                     
                     $sql1 = "SELECT d.id, d.name, d.isPercentage, d.value, pd.product_id from discount d, product_discount pd where d.id = pd.discount_id AND d.isActive = 1";
 
@@ -78,7 +81,8 @@
                                 echo "</div>";
                             }
 
-                            echo "<p>Total: $ <span id='total'></span></p>";
+                            echo "<h5 id='totalHeader' class='mr-5'>Total: $ <span id='total'></span></h5>";
+                            echo "<a href='thanks.php' class='btn btn-success'>Buy Now</a>";
 
                             echo "<script type='text/javascript'>",
                                     "saveProductInfo(" . json_encode($products) . "," . json_encode($discounts) . ");",

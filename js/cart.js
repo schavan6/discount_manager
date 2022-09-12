@@ -73,3 +73,11 @@ function saveProductInfo(products, discounts) {
 
   $('#total').html(total);
 }
+
+function deleteCart(sessionId) {
+  $.ajax({
+    url: 'action.php',
+    method: 'POST',
+    data: { logout: 1, userId: sessionId },
+  });
+}

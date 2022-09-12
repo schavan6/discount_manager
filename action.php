@@ -2,8 +2,9 @@
 session_start();
 require_once "config.php";
 
-if(isset($_POST["addToCart"])){
-    $user_id = $_SESSION["uid"];
+if (isset($_POST["addToCart"])) {
+    
+    $user_id = session_id();
     $p_id = $_POST["proId"];
 
     $sql = "SELECT * FROM cart WHERE product_id = " . $p_id  . " AND user_id = '$user_id'";
@@ -24,6 +25,18 @@ if(isset($_POST["addToCart"])){
     }
 
     
+
+}
+
+if (isset($_POST["logout"])) {
+    
+    $user_id = $_POST["userId"];
+
+    $sql = "DELETE FROM cart WHERE user_id = '$user_id'";
+    $result = mysqli_query($link, $sql);
+    if(!$result) {
+        echo "error deleting cart items!";
+    }
 
 }
 
