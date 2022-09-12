@@ -19,7 +19,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         $name = $input_name;
     }
     
-    // Validate address address
+    
     $input_type = trim($_POST["type"]);
     if (empty($input_type)) {
         $type_err = "Please enter a type.";     
@@ -27,14 +27,21 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         $type = $input_type;
     }
     
-    // Validate salary
+    
     $input_value = trim($_POST["value"]);
     if (empty($input_value)) {
         $value_err = "Please enter the value.";     
-    } elseif(!ctype_digit($input_value)){
+    } elseif (!ctype_digit($input_value)) {
         $value_err = "Please enter a positive integer value.";
-    } else{
+    } else {
         $value = $input_value;
+    }
+
+    if (isset($_POST['isActive']) && $_POST['isActive'] == '1') {
+        $isActive = 1;
+    }
+    else {
+        $isActive = 0;
     }
     
     // Check input errors before inserting in database
@@ -50,7 +57,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
             $param_name = $name;
             $param_type = $type === "Percentage";
             $param_value = $value;
-            $param_active = 1;
+            $param_active = $isActive;
             $param_id = $id;
             
             // Attempt to execute the prepared statement
@@ -96,6 +103,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
                     $name = $row["name"];
                     $type = $row["isPercentage"] ? "Percentage" : "Dollars";
                     $value = $row["value"];
+                    $isActive = $row['isActive'];
                 } else{
                     // URL doesn't contain valid id. Redirect to error page
                     header("location: error.php");
@@ -126,12 +134,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
     <meta charset="UTF-8">
     <title>Update Record</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .wrapper{
-            width: 600px;
-            margin: 0 auto;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="wrapper">
@@ -160,6 +163,15 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
                             <input type="text" name="value" class="form-control <?php echo (!empty($value_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $value; ?>">
                             <span class="invalid-feedback"><?php echo $value_err;?></span>
                         </div>
+
+                        <div>
+                            <?php $checkStatus = $isActive == 1 ?  "checked='checked'" : ""; ?>
+                            <input name ='isActive' type='checkbox' <?php echo $checkStatus ?> value='1' id='isActive'>
+                            <label class='form-check-label' for='isActive'>
+                                Activate?
+                            </label>
+                        </div>
+                        <br/>
                         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
                         <input type="submit" class="btn btn-primary" value="Submit">
                         <a href="discounts.php" class="btn btn-secondary ml-2">Cancel</a>

@@ -14,21 +14,8 @@
 
     <script src="js/cart.js"></script>
 
-    <style>
-        .wrapper{
-            width: 600px;
-            margin: 0 auto;
-        }
-        table tr td:last-child{
-            width: 120px;
-        }
-        img {
-            float: left;
-        }
-        #totalHeader {
-            float: left;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
+
     <script>
         $(document).ready(function() {
             $('[data-toggle="tooltip"]').tooltip();   

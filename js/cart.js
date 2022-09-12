@@ -31,14 +31,20 @@ function applyDiscount(element) {
   var priceBeforeDiscount = price;
 
   var originalPrice = productIdToOriginalPrice.get(productId);
-  console.log(element.checked);
+
   if (element.checked) {
     if (discount['isPercentage'] === '1') {
       var percent = parseInt(discount['value']);
-      price -= (originalPrice * percent) / 100;
+      var off = (originalPrice * percent) / 100;
     } else {
-      price -= parseInt(discount['value']);
+      var off = parseInt(discount['value']);
     }
+
+    if (off > price) {
+      off = price;
+    }
+
+    price -= off;
 
     productIdToDiscountedPrice.set(productId, price);
 

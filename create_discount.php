@@ -31,8 +31,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $value_err = "Please enter the value.";     
     } elseif (!ctype_digit($input_value)) {
         $value_err = "Please enter a positive integer value.";
-    } else {
+    } else if ($type == 'Percentage' && $input_value > 100) {
+        $value_err = "Please enter a percentage less than 100.";
+    }else {
         $value = $input_value;
+    }
+
+    if (isset($_POST['isActive']) && $_POST['isActive'] == '1') {
+        $isActive = 1;
+    }
+    else {
+        $isActive = 0;
     }
     
     // Check input errors before inserting in database
@@ -48,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $param_name = $name;
             $param_type = $type === "Percentage";
             $param_value = $value;
-            $param_active = 1;
+            $param_active = $isActive;
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -77,12 +86,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <title>Create Record</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .wrapper{
-            width: 600px;
-            margin: 0 auto;
-        }
-    </style>
+
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="wrapper">
@@ -108,9 +113,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
                         <div class="form-group">
                             <label>Value</label>
-                            <input type="text" name="value" class="form-control <?php echo (!empty($value_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $value; ?>">
+                            <input type="number" name="value" class="form-control <?php echo (!empty($value_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $value; ?>">
                             <span class="invalid-feedback"><?php echo $value_err;?></span>
                         </div>
+
+                        <div>
+                            <input name ='isActive' type='checkbox' value='1' id='isActive'>
+                            <label class='form-check-label' for='isActive'>
+                                Activate?
+                            </label>
+                        </div>
+                        <br/>
                         <input type="submit" class="btn btn-primary" value="Submit">
                         <a href="discounts.php" class="btn btn-secondary ml-2">Cancel</a>
                     </form>

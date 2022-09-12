@@ -17,7 +17,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         // Attempt to execute the prepared statement
         if(mysqli_stmt_execute($stmt)){
             // Records deleted successfully. Redirect to landing page
-            header("location: admin_index.php");
+            header("location: discounts.php");
             exit();
         } else{
             echo "Oops! Something went wrong. Please try again later.";
@@ -45,12 +45,9 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     <meta charset="UTF-8">
     <title>Delete Record</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .wrapper{
-            width: 600px;
-            margin: 0 auto;
-        }
-    </style>
+
+    <link rel="stylesheet" href="css/style.css">
+    
 </head>
 <body>
     <div class="wrapper">

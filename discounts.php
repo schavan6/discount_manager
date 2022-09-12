@@ -8,15 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <style>
-        .wrapper {
-            width: 600px;
-            margin: 0 auto;
-        }
-        table tr td:last-child {
-            width: 120px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
     <script>
         $(document).ready(function() {
             $('[data-toggle="tooltip"]').tooltip();   
@@ -30,7 +22,7 @@
                 <div class="col-md-12">
                     <div class="mt-5 mb-3 clearfix">
                         <h2 class="pull-left">Discount Details</h2>
-                        <a href="create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New Discount</a>
+                        <a href="create_discount.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New Discount</a>
                     </div>
                     <?php
                     // Include config file
@@ -60,8 +52,8 @@
                                             echo "<td>" . $row['value'] . "</td>";
                                             echo "<td>" . $active . "</td>";
                                             echo "<td>";
-                                                echo '<a href="update.php?id='. $row['id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                                echo '<a href="delete.php?id='. $row['id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                                echo '<a href="update_discount.php?id='. $row['id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                                echo '<a href="delete_discount.php?id='. $row['id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                                             echo "</td>";
                                         echo "</tr>";
                                     }

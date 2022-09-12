@@ -12,12 +12,7 @@
 
     <script src="js/cart.js"></script>
 
-    <style>
-        .wrapper{
-            width: 600px;
-            margin: 0 auto;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <?php
